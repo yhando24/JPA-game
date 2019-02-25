@@ -1,4 +1,4 @@
-INSERT INTO `jpa_game`.`joueur` (`mail`, `nom`, `pseudo`) VALUES ('youcef.handoura@gmail.com', 'HANDOURA', 'John');
+INSERT INTO `jpa_game`.`joueur` (`mail`, `nom`, `pseudo`) VALUES ('handoura.handoura@gmail.com', 'HANDOURA', 'John');
 
 INSERT INTO `jpa_game`.`joueur` (`mail`, `nom`, `pseudo`) VALUES ('plop.handoura@gmail.com', 'plop', 'richard');
 

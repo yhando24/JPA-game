@@ -1,6 +1,7 @@
 package main;
 
 import java.time.LocalDate;
+import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -20,9 +21,9 @@ public class main {
 		TypedQuery<Joueur> query = em.createQuery("FROM Joueur", Joueur.class);
 		System.out.println("Longueur liste : " + query.getResultList().size());
 		
-		for (Joueur joueur : query.getResultList()) {
-			System.out.println(joueur.toString());
-		} 
+		
+			query.getResultList().stream().forEach(e -> System.out.println(e.toString()));
+		
 		
 		EntityTransaction transaction = em.getTransaction();
 		transaction.begin();
@@ -67,9 +68,11 @@ public class main {
 		transaction.begin();
 		try {
 		
-			for (Partie partie : query2.getResultList()) {
-				partie.setNiveau(partie.getNiveau()+1);
-			}
+//			for (Partie partie : query2.getResultList()) {
+//				partie.setNiveau(partie.getNiveau()+1);
+//			}
+			// la meme chose version stream
+			query2.getResultList().stream().forEach(e -> e.setNiveau(e.getNiveau() + 1));
 			transaction.commit();
 		} catch( Exception e) {
 			System.out.println("Pas d'ajout de niveau");

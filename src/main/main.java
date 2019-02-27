@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 
+
 import repository.JoueurRepository;
 
 
@@ -142,7 +143,11 @@ public class main {
 		
 		List <Joueur> joueursToday = JoueurRepository.getJoueursByDatePartie(LocalDate.now().plusDays(1));
 		
-		System.err.println(joueursToday + " CA MARCHE");
+		
+		for (Joueur joueur : joueursToday) {
+			System.err.println("JOUEUR AUJOURDHUI  : " + joueur.getId()  +joueur );
+		}
+
 		
 		Joueur joueurLastPartie = JoueurRepository.getJoueurLastPartieByJoueurId(1);
 		System.out.println(joueurLastPartie + "ENGIN utilisé : " + joueurLastPartie.getAvatar().getEngins() );

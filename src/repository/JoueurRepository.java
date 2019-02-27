@@ -6,12 +6,12 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
-import main.DatabaseHandle;
 import main.Joueur;
+
 
 public class JoueurRepository {
 
-	static EntityManager em = 	DatabaseHandle.getEntityManagerFactory();
+	static EntityManager em = 	main.DatabaseHandle.getEntityManagerFactory();
 	
 	public static Joueur getJoueurByname(String value) {
 		
@@ -34,7 +34,7 @@ public class JoueurRepository {
 
 //		
 //		Select j from Joueur as j JOIN Joueur_partie as jp ON jp.Joueur_id=j.id JOIN Partie as p ON jp.Partie_id=p.id where p.date =:date
-		TypedQuery<Joueur> typedQuery1 = em.createQuery("Select j FROM Joueur j Join j.parties p Join p.joueurs joueurs Where p.date=:date ",Joueur.class);
+		TypedQuery<Joueur> typedQuery1 = em.createQuery("Select DISTINCT j FROM Joueur j Join j.parties p Join p.joueurs joueurs Where p.date=:date ",Joueur.class);
 	
 		typedQuery1.setParameter("date", date );
 		return typedQuery1.getResultList();

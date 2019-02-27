@@ -16,7 +16,7 @@
 			<!-- The database password -->
 			<property name="javax.persistence.jdbc.password" value="root" />
 			
-			  <property name="hibernate.hbm2ddl.auto" value="create"/> 
+			  <property name="hibernate.hbm2ddl.auto" value="create-drop"/> 
 			  
 			 <!--   lis le fichier seulement si on est en create    -->
 				<property name="javax.persistence.sql-load-script-source" value="META-INF/sql/insert_data.sql"/>

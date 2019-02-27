@@ -1,13 +1,13 @@
 package main;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.*;
+
 
 @Entity
-public class Joueur {
+public class Joueur implements Comparable  {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
@@ -19,6 +19,12 @@ public class Joueur {
 	@Column(length=50, nullable=false, unique=true)
 	private String pseudo;
 	
+	@OneToOne
+	private Avatar avatar;
+
+	 @ManyToMany(mappedBy = "joueurs")
+	    private List<Partie> parties = new ArrayList<>();
+	    
 	
 	public int getId() {
 		return id;
@@ -47,11 +53,51 @@ public class Joueur {
 		this.pseudo = pseudo;
 	}
 
+	
+
+	public List<Partie> getParties() {
+		return parties;
+	}
+
+
+	public void setParties(List<Partie> parties) {
+		this.parties = parties;
+	}
+	
+	public void addPartie(Partie partie) {
+		this.parties.add(partie);
+	}
+
+
+	
+	public Avatar getAvatar() {
+		return avatar;
+	}
+
+
+	public void setAvatar(Avatar avatar) {
+		this.avatar = avatar;
+	}
+
 
 	@Override
 	public String toString() {
-		return "Joueur [id=" + id + ", nom=" + nom + ", mail=" + mail + ", pseudo=" + pseudo + "]";
+		return "Joueur [id=" + id + ", nom=" + nom + ", mail=" + mail + ", pseudo=" + pseudo
+				+ "]";
 	}
+	
+	
+	
+	@Override
+	public int compareTo(Object o) {
+		
+		Joueur p = (Joueur) o;
+		int result = pseudo.compareToIgnoreCase(p.getPseudo());
+
+		return result;
+	
+	}
+
 
 	
 }
